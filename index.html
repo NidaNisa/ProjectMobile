@@ -1,0 +1,1061 @@
+  <!DOCTYPE html>
+  <html>
+  <head>
+  	<link rel="stylesheet" type="text/css" href="css/onsenui.min.css">
+  	<link rel="stylesheet" type="text/css" href="css/onsen-css-components.min.css">
+  	<script type="text/javascript"  src="js/onsenui.min.js"></script>
+    <script type="text/javascript"  src="jquery-3.1.1.min.js"></script>
+
+
+    <title>DIGILIB WP</title>
+  </head>
+  <body>
+  	<script type="text/javascript">
+  		function onLoad(){
+  			document.addEventListener("deviceready", onDeviceReady, true);
+  		}
+  		function exitFromApp(){
+  			if(confirm("Apakah Yakin Ingin Keluar?")){
+  				navigator.app.exitApp();
+  			}
+  		}
+  	</script>
+  	<style type="text/css">
+  	.img{
+  		background: #f5f5f5;
+  	}
+  	.corsel{
+  		background: #4b0082;
+  	}
+  </style>
+
+</body>
+<ons-splitter>
+ <ons-splitter-content id="content" page="opening.html"></ons-splitter-content>
+</ons-splitter>
+<template id="opening.html">
+  <ons-page>
+    <ons-carousel fullscreen swipeable auto-scroll overscrollable id="carousel">
+     <ons-carousel-item style="background-image: url('image/logo-depan.jpg'); background-size: cover;"   >
+      <center><ons-button modifier="large-medium" onclick="next()" style="position: absolute; bottom: 40px; left: 50px; right: 50px">Lanjutkan
+      </ons-button>
+    </center>
+  </ons-carousel-item>
+  <ons-carousel-item style="background-image: url('image/yellow.jpg'); background-size: cover;"  >
+    <div style="text-align: center; font-size: 30px; margin-top: 20px; color: blue;"></div>
+    <center><img src="image/logo-stmik.png" style="width: 50%;" ></center>
+    <center><ons-button modifier="large-medium" onclick="next()" style="position: absolute; bottom: 40px; left: 50px; right: 50px">Lanjutkan</ons-button>
+    </center>
+  </ons-carousel-item>
+  <ons-carousel-item style="background-image: url('image/yellow.jpg'); background-size: cover;"  >
+    <div style="text-align: center; font-size: 30px; margin-top: 20px; color: #fff;">
+     Cara Membaca yang menyenangkan
+   </div>
+   <center>
+    <ons-button modifier="large-medium" onclick="fn.load('awal.html')" style="position: absolute; bottom: 40px; left: 50px; right: 50px">Mulai Sekarang
+    </ons-button>
+  </center>
+</ons-carousel-item>
+</ons-carousel>
+</ons-page>
+</template>
+<!-- Tampilan Awal  -->
+<template id="awal.html">
+  <ons-page>
+   <ons-splitter ng-controller="AppController as app" var="splitter">
+     <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+      <ons-page>
+        <ons-list>
+         <div class="center">
+          <ons-icon icon="ion-ios-contact-outline"; size="90px" style="position: absolute; left: 50px; right: 50px"></ons-icon>
+        </div>
+        <ons-button onclick="fn.load('login.html')" style="border: 3px; position: absolute; top: 95px" tappable>Login Sekarang</ons-button>
+        <br>
+        <p style="position: absolute; top: 125px">Untuk Menikmati Semua Fitur Digilib STMIK-WP</p>
+      </ons-list>
+    </ons-page>
+  </ons-splitter-side>
+  <ons-splitter-content id="content" page="awal.html" ></ons-splitter-content>
+</ons-splitter>
+<ons-template id="awal.html">
+  <ons-page ons-show="app.title = 'Awal'">
+   <ons-toolbar>
+    <div class="left">
+     <ons-toolbar-button onclick="fn.open()" >
+      <ons-icon icon="md-menu"></ons-icon>
+    </ons-toolbar-button>
+  </div>
+  <div class="right">
+    <ons-toolbar-button>
+      <img class="list-item__thumbnail" style="width: 35px; height: 35px; padding: 10px 0 0 0;" src="image/logo-stmik.png">
+    </ons-toolbar-button>
+  </div>
+  <div class="center">
+   DIGILIB STMIK-WP
+ </div>
+</ons-toolbar>
+
+<ons-tabbar swipeable position="auto">
+  <div class="tabbar tabbar--top tabbar--top-border">
+   <ons-tab page="koleksi.html" label="Koleksi" icon="ion-ios-book" active></ons-tab>
+   <ons-tab page="pustaka.html" label="Pustaka" icon="ion-ios-bookmarks"></ons-tab>
+   <ons-tab onclick="fn.load('login.html')" label="timeline" icon="ion-social-buffer-outline"></ons-tab>
+   <ons-tab onclick="fn.load('login.html')" label="rak buku" icon="ion-filing"></ons-tab>
+   <ons-tab onclick="fn.load('login.html')" label="notifikasi" icon="ion-android-notifications"></ons-tab>
+ </div>
+</ons-tabbar>
+
+</ons-page>
+</ons-page>
+</template>
+
+<ons-modal direction="up">
+  <div style="text-align: center">
+   <p>
+    <ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading...
+  </p>
+</div>
+</ons-modal>
+
+<!-- LOGIN -->
+<template id="login.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-back-button onclick="fn.load('awal.html')"></ons-back-button>
+      </div>
+    </ons-toolbar>
+
+    <ons-carousel fullscreen>
+      <ons-carousel-item style="background-image: url('image/yellow.jpg'); background-size: cover;">
+        <div style="text-align: center; margin-top: 40px;" id="awal">
+         <p>
+           <ons-input id="username" modifier="underbar" placeholder="Username" float></ons-input>
+         </p>
+         <p>
+           <ons-input id="password" modifier="underbar" type="password" placeholder="Password" float></ons-input>
+         </p>
+         <p style="margin-top: 30px;">
+           <ons-button onclick="login(); fn.load('awal1.html')">Sign in</ons-button>
+         </p>
+       </div>
+       <ons-button modifier="large-medium" onclick="fn.load('daftar.html')" style="position: absolute; bottom: 100px; left: 50px; right: 50px; background-color: red; text-align: right">
+
+       </ons-icon><center>REGISTER NOW</center>
+     </ons-button>
+   </ons-carousel-item>
+ </ons-carousel>
+</ons-page>
+</template>
+<template id="daftar.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-back-button onclick="fn.load('login.html')"></ons-back-button>
+      </div>
+      <div class="center">
+        Daftar
+      </div>
+    </ons-toolbar>
+    <ons-card>
+      <div style="text-align: center; padding: 10px;" id="digilib">
+        <p>Nama Lengkap</p>
+        <p>
+          <ons-input id="nama" modifier="underbar" placeholder="Name" float></ons-input>
+        </p>
+        <p>Email</p>
+        <p>
+          <ons-input id="email" modifier="underbar" placeholder="name@email.com" float></ons-input>
+        </p>
+        <p>Nomor HP</p>
+        <p>
+          <ons-input id="telepon" modifier="underbar" placeholder="+62" min="12" max="15" float></ons-input>
+        </p>
+        <p>Username</p>
+        <p>
+          <ons-input id="username" modifier="underbar" placeholder="username" min="6" max="15" float></ons-input>
+        </p>
+        <p>Password</p>
+        <p>
+          <ons-input id="password" modifier="underbar" placeholder="password" min="6" max="15" float></ons-input>
+        </p>
+
+        <p>
+          <ons-button onclick="daftar(); fn.load('admin.html')">Lanjut</ons-button>
+        </p>
+      </div>
+    </ons-card>
+  </ons-page>
+</template>
+<template id="koleksi.html">
+  <ons-page>
+   <ons-toolbar>
+    <div class="right">
+     <ons-toolbar-button onclick="fn.load('login.html')">
+      <ons-icon icon="ion-android-arrow-dropright"></ons-icon>
+    </ons-toolbar-button>
+  </div>
+  <div class="center">
+   Rekomendasi Buku
+ </div>
+</ons-toolbar>
+<ons-card>
+ <img src="image/java.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('login.html')">
+ <div class="title">
+  JAVA KOMPLET
+</div>
+<div class="content">
+ <div>
+  <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+  <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+</div>
+</div>
+</ons-card>
+<ons-card>
+ <img src="image/ci.jpg" alt="Onsen UI" style="width: 100%" onclick="lfn.load('login.html')">
+ <div class="title">
+  CODEIGNITER
+</div>
+<div class="content">
+ <div>
+  <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+  <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+</div>
+</div>
+</ons-card>
+<ons-card>
+ <img src="image/mobile.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('login.html')">
+ <div class="title">
+  MOBILE JOOMLA
+</div>
+<div class="content">
+ <div>
+  <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+  <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+</div>
+</div>
+</ons-card>
+</ons-page>
+</template>
+
+<template id="pustaka.html">
+  <ons-page>
+   <ons-toolbar>
+    <div class="center">
+      ePustaka
+    </div>
+  </ons-toolbar>
+  <br><br><br><br><br><br>
+  <div style="height: 200px; padding: 1px 0 0 0;">
+    <div class="card card-material">
+     <img src="image/bilingual.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('login.html')">
+     <div class="title">
+       <center><h6>ePustaka</h6>
+        <div class="card__content card--material__content">
+         UPT Bahasa<br>
+
+       </div>
+     </center>
+   </div>
+ </div>
+ <div class="card card-material">
+   <img src="image/bilingual.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('login.html')">
+   <div class="title">
+     <center><h6>ePustaka</h6>
+      <div class="card__content card--material__content">
+       UPT Bahasa<br>
+     </div>
+   </center>
+ </div>
+</div>
+</ons-page>
+</template>
+
+
+
+<template id="awal1.html">
+  <ons-page>
+    <ons-splitter ng-controller="AppController as app" var="splitter">
+     <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+       <ons-page style="background-color: white">
+        <img src="image/perpus.jpg" width="250px" height="150px">
+        <ons-list-item expandable style="background-color: #86BEFF ">
+          User Profil
+          <div class="expandable-content">I am Student from STMIK Widya Pratama Pekalongan</div>
+        </ons-list-item>
+        <ons-list-item modifier="chevron" onclick="fn.load('kategori.html')" style="background-color: #86BEFF"  tappable>
+          <img src="image/rak.png" width="20px" height="20px"> &nbsp;
+          Kategori Bacaan
+        </ons-list-item>
+        <ons-list-item modifier="chevron" onclick="fn.load('epustaka.html')" style="background-color: #86BEFF"  tappable>
+          <img src="image/rak.png" width="20px" height="20px"> &nbsp;
+          kategori ePustaka
+        </ons-list-item>
+        <ons-list-item onclick="fn.load('note.html')" style="background-color: #86BEFF"  tappable>
+          <img src="image/note.png" width="20px" height="20px"> &nbsp;
+          Note Pribadi
+        </ons-list-item>
+        <ons-list-item onclick="fn.load('riwayat.html')" style="background-color: #86BEFF"  tappable>
+          <img src="image/riwayat.png" width="20px" height="20px"> &nbsp;
+          Riwayat Peminjaman
+        </ons-list-item>
+        <ons-list-item onclick="createAlertDialog()" style="background-color: #86BEFF"  tappable>
+          <img src="image/keluar.png" width="20px" height="20px"> &nbsp;
+          Sign Out
+        </ons-list-item>
+      </ons-page>
+    </ons-splitter-side id="menu">
+    <ons-splitter-content id="content" page="awal.html" ></ons-splitter-content>
+  </ons-splitter>
+  <ons-template id="awal.html">
+    <ons-page ons-show="app.title = 'Awal'">
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="fn.open()" >
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="right">
+          <ons-toolbar-button>
+            <img class="list-item__thumbnail" style="width: 35px; height: 35px; padding: 10px 0 0 0;" src="image/logo-stmik.png">
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          DIGILIB STMIK-WP
+        </div>
+      </ons-toolbar>
+
+      <ons-tabbar swipeable position="auto">
+        <div class="tabbar tabbar--top tabbar--top-border">
+          <ons-tab page="koleksi-lo.html" label="Koleksi" icon="ion-ios-book" active></ons-tab>
+          <ons-tab page="pustaka-lo.html" label="Pustaka" icon="ion-ios-bookmarks"></ons-tab>
+          <ons-tab page="timeline-lo.html" label="Timeline" icon="ion-social-buffer-outline"></ons-tab>
+          <ons-tab page="rak-lo.html" label="Rak Buku" icon="ion-filing"></ons-tab>
+          <ons-tab page="notif-lo.html" label="Notifikasi" icon="ion-android-notifications"></ons-tab>
+        </div>
+      </ons-tabbar>
+    </ons-page>
+  </template>
+  <template id="koleksi-lo.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="right">
+          <ons-toolbar-button onclick="fn.load('kategori.html')">
+            <ons-icon icon="ion-android-arrow-dropright"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          Kategori Buku
+        </div>
+      </ons-toolbar>
+
+      <ons-card style="width: 50%">
+       <img src="image/java.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('detailjava.html')">
+       <div class="title">
+         Awesome framework
+       </div>
+       <div class="content">
+        <div>
+          <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+          <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+        </div>
+      </div>
+    </ons-card>
+    <ons-card style="width: 50%">
+     <img src="image/ci.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('detailci.html')">
+     <div class="title">
+       Awesome framework
+     </div>
+     <div class="content">
+      <div>
+        <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+        <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+      </div>
+    </div>
+  </ons-card>
+
+  <ons-card style="width: 50%">
+   <img src="image/mobile.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('detailmobile.html')">
+   <div class="title">
+     Awesome framework
+   </div>
+   <div class="content">
+    <div>
+      <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+      <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+    </div>
+  </div>
+</ons-card>
+</ons-page>
+</template>
+
+<!--Kategori Buku  -->
+<template id="kategori.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-back-button onclick="fn.load('awal1.html')"></ons-back-button>
+      </div>
+      <div class="center">
+        Kategori Buku
+      </div>
+    </ons-toolbar>
+    <section style="padding: 8px">
+      <ons-list>
+        <ons-list-item modifier="chevron" onclick="fn.load('Java.html')" tappable>Java</ons-list-item>
+      </ons-list><br>
+      <ons-list>
+        <ons-list-item modifier="chevron" onclick="fn.load('web.html')" tappable>Pemrograman Web</ons-list-item>
+      </ons-list><br>
+      <ons-list>
+        <ons-list-item modifier="chevron" onclick="fn.load('mining.html')" tappable>Data Mining</ons-list-item>
+      </ons-list><br>
+    </section>
+  </ons-page>
+</template>
+
+
+<template id='Java.html'>
+  <ons-page>
+    <ons-toolbar>
+      <div class="right">
+        <ons-back-button onclick="fn.load('kategori.html')">
+          <ons-icon icon="ion-android-arrow-dropleft"></ons-icon>
+        </ons-back-button>
+      </div>
+      <div class="center">
+        Buku Java
+      </div>
+    </ons-toolbar>
+
+    <ons-card style="width: 50%">
+     <img src="image/java.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('detailjava.html')">
+     <div class="title">
+       Java Komplet
+     </div>
+     <div class="content">
+      <div>
+        <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+        <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+      </div>
+    </div>
+  </ons-card>
+  <ons-card style="width: 50%">
+   <img src="image/java1.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('detaijava2.html')">
+   <div class="title">
+     Belajar JAVA MULAI DARI 0
+   </div>
+   <div class="content">
+    <div>
+      <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+      <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+    </div>
+  </div>
+</ons-card>
+</ons-page>
+</template>
+
+<template id="web.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="right">
+        <ons-back-button onclick="fn.load('kategori.html')">
+          <ons-icon icon="ion-android-arrow-dropleft"></ons-icon>
+        </ons-back-button>
+      </div>
+      <div class="center">
+        Buku WEB
+      </div>
+    </ons-toolbar>
+
+    <ons-card style="width: 50%">
+     <img src="image/ci.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('detailci.html')">
+     <div class="title">
+       Codeigniter
+     </div>
+     <div class="content">
+      <div>
+        <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+        <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+      </div>
+    </div>
+  </ons-card>
+</ons-page>
+</template>
+
+<template id='mining.html'>
+
+  <ons-page>
+    <ons-toolbar>
+      <div class="right">
+        <ons-back-button onclick="fn.load('kategori.html')">
+          <ons-icon icon="ion-android-arrow-dropleft"></ons-icon>
+        </ons-back-button>
+      </div>
+      <div class="center">
+        Buku Data Mining
+      </div>
+    </ons-toolbar>
+
+    <ons-card style="width: 50%">
+     <img src="image/mining.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('detailmining.html')">
+     <div class="title">
+     Data Mining</br>
+     Teori dan Praktek Rapid Miner
+   </div>
+   <div class="content">
+    <div>
+      <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+      <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+    </div>
+  </div>
+</ons-card>
+</ons-page>
+
+</template>
+
+
+<!-- Kategori Pustaka -->
+
+<template id="pustaka-lo.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="right">
+        <ons-toolbar-button onclick="fn.load('awal1.html')">
+          <ons-icon icon="ion-android-arrow-dropright"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        e-Pustaka
+      </div>
+    </ons-toolbar>
+    <br><br><br><br><br><br>
+    <div style="height: 200px; padding: 1px 0 0 0;">
+      <div class="card card-material">
+        <img src="image/bilingual.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('uptbahasa.html')">
+        <div class="title">
+          <center><h6>ePustaka</h6>
+            <div class="card__content card--material__content">
+              UPT Bahasa<br>
+
+            </div>
+          </center>
+        </div>
+      </div>
+      <div class="card card-material">
+        <img src="image/bilingual.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('pakvitor.html')">
+        <div class="title">
+          <center><h6>ePustaka</h6>
+            <div class="card__content card--material__content">
+              Victorianus <br>
+            </div>
+          </center>
+        </div>
+      </div>
+    </ons-page>
+  </template>
+
+  <template id="uptbahasa.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-back-button onclick="fn.open('pustaka-lo.html')">
+          </ons-back-button>
+        </div>
+        <div class="right">
+         <ons-toolbar-button>
+          <img class="list-item__thumbnail" style="width: 35px; height: 35px; padding: 10px 0 0 0;" src="image/logo-stmik.png">
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        UPT Bahasa
+      </div>
+    </ons-toolbar>
+    <ons-tabbar swipeable position="auto">
+      <div class="tabbar tabbar--top tabbar--top-border">
+        <ons-tab page="koleksi-upt.html" label="Koleksi" icon="ion-ios-book" active></ons-tab>
+        <ons-tab page="profil-upt.html" label="Profil" icon="ion-ios-bookmarks"></ons-tab>
+      </div>
+    </ons-tabbar>
+  </ons-page>  
+</template>
+<template id="pakvitor.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-back-button onclick="fn.open('pustaka-lo.html')" >
+        </ons-back-button>
+      </div>
+      <div class="right">
+       <ons-toolbar-button>
+        <img class="list-item__thumbnail" style="width: 35px; height: 35px; padding: 10px 0 0 0;" src="image/logo-stmik.png">
+      </ons-toolbar-button>
+    </div>
+    <div class="center">
+      Pak Viktor
+    </div>
+  </ons-toolbar>
+
+  <ons-tabbar swipeable position="auto">
+    <div class="tabbar tabbar--top tabbar--top-border">
+      <ons-tab page="koleksi-pak.html" label="Koleksi" icon="ion-ios-book" active></ons-tab>
+      <ons-tab page="profil-pak.html" label="Profil" icon="ion-ios-bookmarks"></ons-tab>
+    </div>
+  </ons-tabbar>
+</ons-page>  
+</template>
+
+<template id="epustaka.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-back-button onclick="fn.load('awal1.html')"></ons-back-button>
+      </div>
+      <div class="center">
+        ePustaka
+      </ons-toolbar>
+      <section style="padding: 8px">
+        <ons-list>
+          <ons-list-item modifier="chevron" onclick="fn.load('ub.html')" tappable>UPT Bahasa</ons-list-item>
+        </ons-list><br>
+        <ons-list>
+          <ons-list-item modifier="chevron" onclick="fn.load('pv.html')" tappable>Pak Victor</ons-list-item>
+        </ons-list><br>
+        <ons-list>
+          <ons-list-item modifier="chevron" onclick="fn.load('dicoding.html')" tappable>dicoding</ons-list-item>
+        </ons-list>
+        <br>
+      </section>
+    </ons-page>
+  </template>
+
+
+
+  <!-- detail buku -->
+    <!-- <template id="detailjava.html">
+      <ons-toolbar>
+         <div class="left">
+            <ons-back-button onclick="fn.load('awal1.html')"></ons-back-button>
+          </div>
+          <div class="center">
+            Detail Buku
+         </div>
+          <div class="right">
+            <ons-button onclick="fn.load('awal1.html')"><ons-icon icon="ion-more"></ons-icon></ons-back-button>
+          </div>
+        </ons-toolbar>
+        <ons-card>
+           <img src="image/java.jpg" alt="Onsen UI" style="width: 100%">
+             <div class="title">
+               Awesome framework
+              </div>
+            <div class="content">
+              <div>
+              <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+              <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+              </div>
+            </div>
+        </ons-card>
+      </template> -->
+      <template id="detailjava.html">
+        <ons-page>
+          <ons-toolbar>
+            <div class="left">
+              <ons-back-button onclick="fn.load('awal1.html')"></ons-back-button>
+            </div>
+            <disv class="center">
+              Detail Buku
+            </div>
+          </ons-toolbar>
+
+          <ons-card>
+           <img src="image/java.jpg" alt="Onsen UI" style="width: 100%">
+
+
+           <ons-button modifier="large" onclick="fn.loadLink('https://play.google.com/books/reader?id=G0NGDwAAQBAJ&hl=en_US&pg=GBS.PR10')" style=" background-color: red; text-align: center"><ons-icon icon="ion-ios-download" size="30px"></ons-icon>Pinjam
+           </ons-button>
+
+           <ons-list-header id="judul" style="font-size: 35px">JAVA KOMPLET</ons-list-header>
+           <ons-list-item id="pengarang" modifier="nodivider">Pengarang : Jubile Entreprise</ons-list-item>
+           <ons-list-item id="penerbit" modifier="nodivider">Penerbit : ELEX MEDIA KOMPUTINDO</ons-list-item>
+           <ons-list-item id="isbn" modifier="nodivider">ISBN : 9786020433851</ons-list-item>
+
+         </ons-card>
+
+
+       </ons-page>
+
+     </template>
+
+
+     <template id="detailci.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="left">
+            <ons-back-button onclick="fn.load('awal1.html')"></ons-back-button>
+          </div>
+          <disv class="center">
+            Detail Buku
+          </div>
+        </ons-toolbar>
+
+        <ons-card>
+         <img src="image/ci.jpg" alt="Onsen UI" style="width: 100%">
+
+
+         <ons-button modifier="large" onclick="download(); fn.load('daftar.html')" style=" background-color: red; text-align: center"><ons-icon icon="ion-ios-download" size="30px"></ons-icon>Pinjam
+         </ons-button>
+
+         <ons-list-header id="judul" style="font-size: 35px">CODEIGNITER</ons-list-header>
+         <ons-list-item id="pengarang" modifier="nodivider">Pengarang : Jubile Entreprise</ons-list-item>
+         <ons-list-item id="penerbit" modifier="nodivider">Penerbit : ELEX MEDIA KOMPUTINDO</ons-list-item>
+         <ons-list-item id="isbn" modifier="nodivider">ISBN : 9789792781892 </ons-list-item>
+       </ons-card>
+     </ons-page>
+   </template>
+
+   <template id="detailmining.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-back-button onclick="fn.load('awal1.html')"></ons-back-button>
+        </div>
+        <disv class="center">
+          Detail Buku
+        </div>
+      </ons-toolbar>
+      <ons-card>
+       <img src="image/ci.jpg" alt="Onsen UI" style="width: 100%">
+       <ons-button modifier="large" onclick="download(); fn.load('baca.html')" style=" background-color: red; text-align: center"><ons-icon icon="ion-ios-download" size="30px"></ons-icon>Pinjam
+       </ons-button>
+       <ons-list-header id="judul" style="font-size: 35px">DATA MINING TEORI DAN APLIKASI RAPIDMINER</ons-list-header>
+       <ons-list-item id="pengarang" modifier="nodivider">Pengarang : Retno Tri Vulandari, S.Si.,M.Si</ons-list-item>
+       <ons-list-item id="penerbit" modifier="nodivider">Penerbit : Gava Media</ons-list-item>
+       <ons-list-item id="isbn" modifier="nodivider">ISBN : 9789792781892 </ons-list-item>
+     </ons-card>
+   </ons-page>
+ </template>
+
+ <template id="detailmobile.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-back-button onclick="fn.load('awal1.html')"></ons-back-button>
+      </div>
+      <disv class="center">
+        Detail Buku
+      </div>
+    </ons-toolbar>
+
+    <ons-card>
+     <img src="image/mobile.jpg" alt="Onsen UI" style="width: 100%">
+
+
+     <ons-button modifier="large" onclick="download(); fn.load('daftar.html')" style=" background-color: red; text-align: center"><ons-icon icon="ion-ios-download" size="30px"></ons-icon>Pinjam
+     </ons-button>
+
+     <ons-list-header id="judul" style="font-size: 35px">Mobile Joomla</ons-list-header>
+     <ons-list-item id="pengarang" modifier="nodivider">Pengarang : Edy Winarno, ST, M.Eng</ons-list-item>
+     <ons-list-item id="penerbit" modifier="nodivider">Penerbit : ELEX MEDIA KOMPUTINDO</ons-list-item>
+     <ons-list-item id="isbn" modifier="nodivider">ISBN : 9786020246956</ons-list-item>
+
+   </ons-card>
+
+
+ </ons-page>
+
+</template>
+
+
+
+
+  <!-- 
+    Timeline -->
+
+    <template id="timeline-lo.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="center">
+            Timeline
+          </div>
+        </ons-toolbar>
+        <div class="card card-material">
+         <ons-list-item>
+           <div class="left">
+            <span><img class="list-item__thumbnail" src="image/nay.jpg" ></span>
+          </div>
+          <div class="center">
+            <span class="list-item__title">Nur Inayah</span>
+            <span class="list-item__subtitle"><span class="username">@inayah14_</span>&nbsp;&#8231;&nbsp;2h</span>
+            <span class="list-item__subtitle">Menambahkan Sebuah Buku
+              <img src="image/Java.jpg" alt="PostImage" width="70%"></span>
+            </div>
+          </ons-list-item>
+        </div>
+        <div class="card card-material">
+         <ons-list-item>
+           <div class="left">
+            <span><img class="list-item__thumbnail" src="image/istho.jpg"></span>
+          </div>
+          <div class="center">
+            <span class="list-item__title">Hanif Istho' Faizah</span>
+            <span class="list-item__subtitle"><span class="username">@istho_faizah</span>&nbsp;&#8231;&nbsp;5h 10m</span>
+            <span class="list-item__subtitle">Menambahkan Sebuah Buku
+              <img src="image/java1.jpg" alt="PostImage" width="70%"></span>
+            </div>
+          </ons-list-item>
+        </div>
+        <div class="card card-material">
+         <ons-list-item>
+           <div class="left">
+            <span><img class="list-item__thumbnail" src="image/kartika.jpg"></span>
+          </div>
+          <div class="center">
+            <span class="list-item__title">Kartika Rizki</span>
+            <span class="list-item__subtitle"><span class="username">@kartika44</span>&nbsp;&#8231;&nbsp;1d</span>
+            <span class="list-item__subtitle">Menambahkan Sebuah Buku
+              <img src="image/mining.jpg" alt="PostImage" width="70%"></span>
+            </div>
+          </ons-list-item>
+        </div>
+      </ons-page>
+    </template>
+
+    <template id="rak-lo.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="left">
+            <ons-back-button onclick="fn.load('awal1.html')"></ons-back-button>
+          </div>
+          <div class="center">
+           Susunan RAK
+         </div>
+       </ons-toolbar>
+       <section style="padding: 8px">
+        <ons-list>
+          <ons-list-item modifier="chevron" onclick="fn.load('pinjam.html')" tappable>Pinjaman Buku</ons-list-item>
+        </ons-list><br>
+        <ons-list>
+          <ons-list-item modifier="chevron" onclick="fn.load('antri.html')" tappable>Antrian Buku</ons-list-item>
+        </ons-list><br>
+        <ons-list>
+          <ons-list-item modifier="chevron" onclick="fn.load('riwayat.html')" tappable>Riwayat Peminjaman</ons-list-item>
+        </ons-list><br>
+      </section>
+    </ons-page>
+  </template>
+
+  <template id="note.html">
+    <ons-page>
+      <ons-toolbar>
+       <div class="left">
+        <ons-back-button onclick="fn.load('awal1.html')"></ons-back-button>
+      </div>
+      <div class="center">
+        Catatan Pribadi
+      </div>
+    </ons-toolbar>
+
+    <ons-card>
+      <div class="title">
+        Be A Analis
+      </div>
+      <div class="content">
+        <div>
+          <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+        </div>
+      </div>
+    </ons-card>
+    <ons-icon><img src="image/catat.png" onclick="fn.load('catat.html')"></ons-icon>
+  </ons-page>
+</template>
+
+
+
+<template id="catat.html">
+  <ons-page>
+    <ons-toolbar>
+     <div class="left">
+      <ons-back-button onclick="fn.load('awal1.html')"></ons-back-button>
+    </div>
+    <div class="right">
+      <ons-button onclick="catat();"> SIMPAN </ons-button>
+    </div>
+    <div class="center">
+      Catatan Baru
+    </div>
+  </ons-toolbar>
+
+  <div style="text-align: top; margin-top: 0px;" id="awal">
+   <p>
+     <ons-input id="judul" modifier="underbar" placeholder="Judul" float></ons-input>
+   </p>
+   <p>
+     <ons-input id="deskripsi" modifier="underbar" placeholder="Deskripsi" float></ons-input>
+   </p>
+
+ </div>
+</template>
+<template id="pinjam.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="right">
+        <ons-toolbar-button onclick="fn.load('rak-lo.html')">
+          <ons-icon icon="ion-android-arrow-dropright"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        Pinjaman Buku
+      </div>
+    </ons-toolbar>
+    <ons-card style="width: 50%">
+     <img src="image/java.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('detailjava.html')">
+     <div class="title">
+       Awesome framework
+     </div>
+     <div class="content">
+      <div>
+        <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+        <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+      </div>
+    </div>
+  </ons-card>
+  <ons-card style="width: 50%">
+   <img src="image/ci.jpg" alt="Onsen UI" style="width: 100%" onclick="lfn.load('detailci.html')">
+   <div class="title">
+     Awesome framework
+   </div>
+   <div class="content">
+    <div>
+      <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+      <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+    </div>
+  </div>
+</ons-card>
+<ons-card style="width: 50%">
+ <img src="image/mobile.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('detailmobile.html')">
+ <div class="title">
+   Awesome framework
+ </div>
+ <div class="content">
+  <div>
+    <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+    <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+  </div>
+</div>
+</ons-card>
+</ons-page>
+</template>
+<template id="antri.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="right">
+        <ons-toolbar-button onclick="fn.load('rak-lo.html')">
+          <ons-icon icon="ion-android-arrow-dropright"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        Antrian Buku
+      </div>
+    </ons-toolbar>
+    <ons-card style="width: 50%">
+     <img src="image/java.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('detailjava.html')">
+     <div class="title">
+       Awesome framework
+     </div>
+     <div class="content">
+      <div>
+        <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+        <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+      </div>
+    </div>
+  </ons-card>
+  <ons-card style="width: 50%">
+   <img src="image/ci.jpg" alt="Onsen UI" style="width: 100%" onclick="lfn.load('detailci.html')">
+   <div class="title">
+     Awesome framework
+   </div>
+   <div class="content">
+    <div>
+      <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+      <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+    </div>
+  </div>
+</ons-card>
+<ons-card style="width: 50%">
+ <img src="image/mobile.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('detailmobile.html')">
+ <div class="title">
+   Awesome framework
+ </div>
+ <div class="content">
+  <div>
+    <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+    <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+  </div>
+</div>
+</ons-card>
+</ons-page>
+</template>
+<template id="riwayat.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="right">
+        <ons-toolbar-button onclick="fn.load('rak-lo.html')">
+          <ons-icon icon="ion-android-arrow-dropright"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        Riwayat Peminjaman
+      </div>
+    </ons-toolbar>
+    <ons-card style="width: 50%">
+     <img src="image/java.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('detailjava.html')">
+     <div class="title">
+       Awesome framework
+     </div>
+     <div class="content">
+      <div>
+        <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+        <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+      </div>
+    </div>
+  </ons-card>
+  <ons-card style="width: 50%">
+   <img src="image/ci.jpg" alt="Onsen UI" style="width: 100%" onclick="lfn.load('detailci.html')">
+   <div class="title">
+     Awesome framework
+   </div>
+   <div class="content">
+    <div>
+      <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+      <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+    </div>
+  </div>
+</ons-card>
+<ons-card style="width: 50%">
+ <img src="image/mobile.jpg" alt="Onsen UI" style="width: 100%" onclick="fn.load('detailmobile.html')">
+ <div class="title">
+   Awesome framework
+ </div>
+ <div class="content">
+  <div>
+    <ons-button><ons-icon icon="ion-android-stopwatch"></ons-icon></ons-button>
+    <ons-button><ons-icon icon="ion-more"></ons-icon></ons-button>
+  </div>
+</div>
+</ons-card>
+</ons-page>
+</template>
+
+
+
+
+
+
+
+  	<!-- 
+     <script type="text/javascript" src="jquery-3.1.1.min.js"></script> -->
+
+     <script type="text/javascript"  src="js/main.js"></script>
+
+     </html>

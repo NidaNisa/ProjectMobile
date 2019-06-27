@@ -1,0 +1,448 @@
+	<!DOCTYPE html>
+	<html>
+	<head>
+
+		<link rel="stylesheet" type="text/css" href="css/onsenui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/onsen-css-components.min.css">
+		<script type="text/javascript" src="js/onsenui.min.js"></script>
+		<script type="text/javascript"  src="jquery-3.1.1.min.js"></script>
+
+
+		<title>Admin DIGILIB STMIK</title>
+
+	</script>
+	<style type="text/css">
+	.img{
+		background: #f5f5f5;
+	}
+	.corsel{
+		background: #blue;
+	}
+	.instagram{
+		background: red;
+	}
+	.AC{
+		background: green;
+	}
+</style>
+</head>
+<body>
+	<ons-splitter>
+		<ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+		</ons-splitter-side>
+		<ons-splitter-content id="content" page="opening.html"></ons-splitter-content>
+	</ons-splitter>
+
+	<template id="opening.html">
+		<ons-page>
+			<ons-toolbar>
+				<div class="right">
+					<ons-toolbar-button>
+						<img class="list-item__thumbnail" style="width: 35px; height: 35px; padding: 10px 0 0 0;" src="image/logo-stmik.png">
+					</ons-toolbar-button>
+				</div>
+				<div class="center">
+					Admin Digilib
+				</div>
+			</ons-toolbar>
+			<div class="card card-material">
+				<img src="image/Untitled-1.jpg" style="width: 70%; display: block; margin-left: auto; margin-right: auto;" class="center">
+				<div class="content">
+					<p align="justify">Selamat Datang di DIGILIB</p>
+
+					<ons-row>
+						<ons-col width="50%"> <ons-button onclick="showTemplateDialog()">Masuk</ons-button></ons-col>
+						<ons-col width="50%"> <ons-button onclick="fn.load('daftar.html')">Daftar</ons-button></ons-col>
+					</ons-row>
+				</div>
+			</div>
+		</ons-page>
+	</template>
+
+	<template id="login.html">
+		<ons-dialog id="my-dialog">
+			<div style="text-align: center; padding: 10px;">
+				<center><h4>Login</h4></center>
+				<p>
+					<ons-input id="user" modifier="underbar" placeholder="Username" float autofocus></ons-input>
+				</p>
+				<p>
+					<ons-input id="pass" modifier="underbar" type="password" placeholder="Password" float></ons-input>
+				</p>
+				<p>
+					<ons-button onclick="hideDialog('my-dialog'); login(); fn.load('home.html')">Masuk</ons-button>
+					<ons-button onclick="hideDialog('my-dialog')">Batal</ons-button>
+				</p>
+			</div>
+		</ons-dialog>
+	</template>
+
+	<template id="daftar.html">
+		<ons-page>
+			<ons-toolbar>
+				<div class="left">
+					<ons-back-button onclick="fn.load('opening.html')"></ons-back-button>
+				</div>
+				<div class="center">
+					Daftar
+				</div>
+			</ons-toolbar>
+			<div class="card card-material">
+				<div style=" padding: 10px;">
+					<ons-row>
+						<ons-col width="45%">
+							<p>Nama</p>
+						</ons-col>	
+						<ons-col width="55%">
+							<ons-input id="nama" modifier="underbar" placeholder="Nama" type="text" style="padding: 7px;"></ons-input>
+						</ons-col>	
+					</ons-row>
+					<ons-row>
+						<ons-col width="45%">
+							<p>Email</p>
+						</ons-col>	
+						<ons-col width="55%">
+							<ons-input id="email" modifier="underbar" placeholder="Email" type="text" style="padding: 7px;"></ons-input>
+						</ons-col>	
+					</ons-row>
+					<ons-row>
+						<ons-col width="45%">
+							<p>Telepon</p>
+						</ons-col>	
+						<ons-col width="55%">
+							<ons-input id="telepon" modifier="underbar" placeholder="+62" type="text" style="padding: 7px;"></ons-input>
+						</ons-col>	
+					</ons-row>
+					<ons-row>
+						<ons-col width="45%">
+							<p>Username</p>
+						</ons-col>	
+						<ons-col width="55%">
+							<ons-input id="user" modifier="underbar" placeholder="Username" type="text" style="padding: 7px;"></ons-input>
+						</ons-col>	
+					</ons-row>
+					<ons-row>
+						<ons-col width="45%">
+							<p>Password</p>
+						</ons-col>	
+						<ons-col width="55%">
+							<ons-input id="pass" modifier="underbar" placeholder="Password" min="12" max="15" type="text" style="padding: 7px;"></ons-input>
+						</ons-col>	
+					</ons-row>
+
+					<ons-button onclick="daftar(); fn.load('opening.html')">Daftar</ons-button>
+				</p>
+			</div>
+		</div>
+	</ons-page>
+</template>
+<!-- =========================================  TEMPLATE HOME  ======================================== -->
+<template id="home.html">
+	<ons-page>
+		<ons-toolbar>
+			<div class="right">
+				<ons-toolbar-button>
+					<img class="list-item__thumbnail" style="width: 35px; height: 35px; padding: 10px 0 0 0;" src="image/logo-stmik.png">
+				</ons-toolbar-button>
+			</div>
+			<div class="center">
+				DIGILIB STMIK
+			</div>
+		</ons-toolbar>
+		<ons-tabbar swipeable position="auto">
+			<div class="tabbar tabbar--top tabbar--top-border" id="tabHome">
+				<ons-tab id="0" page="master.html" label="master" icon=".ion-android-home" active></ons-tab>
+				<ons-tab id="2" page="pinjam.html" label="pinjam" icon=".ion-android-hand"></ons-tab>
+				<ons-tab id="3" page="akun.html" label="Akun" icon=".ion-android-pin"></ons-tab>
+			</div>
+		</ons-tabbar>
+	</ons-page>
+</template>
+<template id="home1.html">
+	<ons-page>
+		<ons-toolbar>
+			<div class="right">
+				<ons-toolbar-button>
+					<img class="list-item__thumbnail" style="width: 35px; height: 35px; padding: 10px 0 0 0;" src="image/logo-stmik.png">
+				</ons-toolbar-button>
+			</div>
+			<div class="center">
+				DIGILIB STMIK
+			</div>
+		</ons-toolbar>
+		<ons-tabbar swipeable position="auto">
+			<div class="tabbar tabbar--top tabbar--top-border" id="tabHome">
+				<ons-tab id="0" page="master.html" label="master" icon=".ion-android-home" active></ons-tab>
+				<ons-tab id="2" page="pinjam.html" label="pinjam" icon=".ion-android-hand"></ons-tab>
+				<ons-tab id="3" page="akun.html" label="Akun" icon=".ion-android-pin"></ons-tab>
+			</div>
+		</ons-tabbar>
+	</ons-page>
+</template>
+
+
+
+
+
+<template id="master.html">
+	<ons-page>
+		<div class="card card-material">
+			<img src="image/Untitled-1.jpg.png" style="width: 100%; display: block; margin-left: auto; margin-right: auto;" class="center"><br>
+			<ons-row style="align: justify;">
+				<ons-col width="50%">
+					<center><img src="image/buku.png" style="width: 75%" onclick="fn.load('buku.html')"><br></center><font color="#4b0082" size="2px"><center><b>BUKU</b></center></font>
+				</ons-col>
+				<ons-col width="50%">
+					<center><img src="image/user.png" style="width: 75%" onclick="fn.load('user.html')"><br></center><font color="#4b0082" size="2px"><center><b>USER</b></center></font>
+				</ons-col>					
+			</ons-row>
+		</div>
+		<div class="card card-material">
+			<center>
+				<ons-row>
+					<ons-col width="20%">
+						<ons-button onclick="prev()" class="corsel">
+							<ons-icon icon="md-chevron-left"></ons-icon>
+						</ons-button>
+					</ons-col>
+					<ons-col width="60%">
+						<ons-carousel fullscreen swipeable auto-scroll overscrollable id="carousel">
+							<ons-carousel-item>
+								<img src="image/Untitled-1.jpg" style="width: 100%">
+							</ons-carousel-item>
+							<ons-carousel-item>
+								<img src="image/Untitled-1.jpg" style="width: 100%">
+							</ons-carousel-item>
+						</ons-carousel>
+					</ons-col>
+					<ons-col width="20%">
+						<ons-button onclick="next()" class="corsel">
+							<ons-icon icon="md-chevron-right"></ons-icon>
+						</ons-button>
+					</ons-col>
+				</ons-row>
+			</center>
+
+		</div>
+	</ons-page>
+</template>
+
+<template id="user1.html">
+	<ons-page>
+		<ons-toolbar>
+			<div class="right">
+				<ons-toolbar-button>
+					<img class="list-item__thumbnail" style="width: 35px; height: 35px; padding: 10px 0 0 0;" src="image/logo-stmik.png">
+				</ons-toolbar-button>
+				<div class="left">
+					<ons-back-button onclick="fn.load('master.html')"></ons-back-button>
+				</div>
+				<div class="center">
+					Data User
+				</div>
+			</ons-toolbar>
+			<div class="data-table card" id="show_edit_part">
+				<table>
+					<thead>
+						<tr>
+							<th >NAMA</th>
+							<th >EMAIL</th>
+							<th >TELEPON</th>
+							<th >USERNAME</th>
+
+						</tr>
+					</thead>
+					<tbody id="list_data">
+
+					</tbody>
+				</table>
+			</div>
+		</ons-page>
+	</template>
+	<template id="buku1.html">
+		<ons-page>
+			<ons-toolbar>
+				<div class="right">
+					<ons-toolbar-button>
+						<img class="list-item__thumbnail" style="width: 35px; height: 35px; padding: 10px 0 0 0;" src="image/logo-stmik.png">
+					</ons-toolbar-button>
+				</div>
+				<div class="left">
+					<ons-back-button onclick="fn.load('master.html')"></ons-back-button>
+				</div>
+				<div class="center">
+					Data Buku
+				</div>
+
+			</ons-toolbar>
+			<div class="data-table card" id="show_edit_part">
+				<table>
+					<thead>
+						<tr>
+							<th >JUDUL</th>
+							<th >PENGARANG</th>
+							<th >PENERBIT</th>
+							<th >SINOPSIS</th>
+							<th >ISBN</th>
+							<th >BUKU</th>
+						</tr>
+					</thead>
+					<tbody id="list_data">
+					</tbody>
+				</table>
+			</div>
+		</ons-page>
+	</template>
+
+
+
+
+	<template id="input_buku.html">
+		<ons-page>
+			<ons-toolbar>
+				<div class="left">
+					<ons-back-button onclick="fn.load('master.html')"></ons-back-button>
+				</div>
+				<div class="center">
+					Input Buku
+				</div>
+			</ons-toolbar>
+			<div class="card card-material">
+				<div style="text-align: center; padding: 10px;" id="digilib">
+					<p>Judul</p>
+					<p>
+						<ons-input id="judul" modifier="underbar" placeholder="Judul" float></ons-input>
+					</p>
+					<p>Pengarang</p>
+					<p>
+						<ons-input id="pengarang" modifier="underbar" placeholder="Pengarang" float></ons-input>
+					</p>
+					<p>Penerbit</p>
+					<p>
+						<ons-input id="penerbit" modifier="underbar" placeholder="Penerbit" float></ons-input>
+					</p>
+					<p>Sinopsis</p>
+					<p>
+						<ons-input id="sinopsis" modifier="underbar" placeholder="Sinopsis"  float></ons-input>
+					</p>
+					<p>ISBN</p>
+					<p>
+						<ons-input id="isbn" modifier="underbar" placeholder="ISBN" float></ons-input>
+					</p>
+					<p>Buku</p>
+					<p>
+						<ons-input id="buku" modifier="underbar" placeholder="Buku" type="file" float></ons-input>
+					</p>
+
+					<p>
+						<ons-button onclick="input(); fn.load('buku.html')">Lanjut</ons-button>
+					</p>
+				</div>
+			</div>
+		</ons-page>
+	</template>
+
+	<template id="akun.html">
+		<ons-page>
+			<section style="padding: 8px">
+				<ons-list>
+					<ons-list-item>
+						<span class="list-item__title">digilib-wp</span><span class="list-item__subtitle">digilib-wp@gmail.com</span>
+						<div  id='email1'></div>
+					</ons-list-item>
+				</ons-list>
+			</ons-page>
+		</template>
+
+		<template id="pinjam.html">
+			<ons-page>
+				<section style="padding: 8px">
+					<ons-list>
+						<ons-list-item modifier="chevron" onclick="fn.load('selesai.html')" tappable>Masa Pinjam Selesai</ons-list-item>
+					</ons-list><br>
+					<ons-list>
+						<ons-list-item modifier="chevron" onclick="fn.load('baru.html')" tappable>Pinjaman Baru</ons-list-item>
+					</ons-list><br>
+					<ons-list>
+						<ons-list-item modifier="chevron" onclick="fn.load('stok.html')" tappable>Stok Buku</ons-list-item>
+					</ons-list><br>
+				</section>
+			</ons-page>
+		</template>
+
+		<template id="user.html">
+			<ons-page>
+				<ons-toolbar>
+					<div class="left">
+						<ons-back-button onclick="fn.load('home.html')">Back</ons-back-button>
+					</div>
+					<div class="center">
+						DATA USER
+					</div>
+				</ons-toolbar>
+				<div class="data-table card" id="show_edit_part">
+					<table>
+						<thead>
+							<tr>
+								<th >NAMA</th>
+								<th >EMAIL</th>
+								<th >TELEPON</th>
+								<th >USERNAME</th>
+
+							</tr>
+						</thead>
+						<tbody id="list_data">
+						</tbody>
+					</ons-page>
+				</template>
+
+				<template id="buku.html">
+					<ons-page>
+						<ons-toolbar>
+							<div class="right">
+								<ons-toolbar-button>
+									<img class="list-item__thumbnail" style="width: 35px; height: 35px; padding: 10px 0 0 0;" src="image/logo-stmik.png">
+								</ons-toolbar-button>
+							</div>
+							<div class="left">
+								<ons-back-button onclick="fn.load('home1.html')"></ons-back-button>
+							</div>
+							<div class="center">
+								Data Buku
+							</div>
+						</ons-toolbar>
+						<div class="data-table card" id="show_edit_part">
+							<table>
+								<thead>
+									<tr>
+										<th >JUDUL</th>
+										<th >PENGARANG</th>
+										<th >PENERBIT</th>
+										<th >SINOPSIS</th>
+										<th >ISBN</th>
+										<th >BUKU</th>
+									</tr>
+								</thead>
+								<tbody id="list_data">
+								</tbody>
+							</table>
+						</div>
+							</ons-page>
+						</template>
+
+
+
+
+						<ons-modal direction="up">
+							<div style="text-align: center">
+								<p>
+									<ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading...
+								</p>
+							</div>
+						</ons-modal>
+
+						<!-- <script type="text/javascript"></script> -->
+						<script  type = "text/javascript" src="js/app.js"></script>
+
+					</body>
+					</html>
